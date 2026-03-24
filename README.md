@@ -69,23 +69,22 @@ Access the style through ThreeGeoPlay `MapConfig` and modify materials directly 
 import * as THREE from 'three';
 
 //geo is instance of  ThreeGeoPlay
-const mapConfig = geo.getMapConfig();
+const style = geo.getMapConfig().mapStyle;
  
-// Style roads — get the layer, then set material on the type
-const transport = mapConfig.mapStyle.getStyleLayerByName('transportation');
-transport.primary.material = new THREE.MeshBasicMaterial({ color: 0xffffff });
-transport.primary.outlineMaterial = new THREE.MeshBasicMaterial({ color: 0xcccccc });
-transport.motorway.isVisible = true;
-transport.pedestrian.isVisible = false;
+// Style roads 
+style.transportationLayer.primary.material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+style.transportationLayer.primary.outlineMaterial = new THREE.MeshBasicMaterial({ color: 0xcccccc });
+style.transportationLayer.motorway.isVisible = true;
+style.transportationLayer.pedestrian.isVisible = true;
  
 // Style land use
-const landuse = mapConfig.mapStyle.getStyleLayerByName('landuse');
-landuse.residential.material = new THREE.MeshBasicMaterial({ color: 0xe8f4e8 });
-landuse.industrial.isVisible = false;
+style.landUseLayer.residential.material = new THREE.MeshBasicMaterial({ color: 0xe8f4e8 });
+style.landUseLayer.industrial.isVisible = true;
  
-// Style waterways
-const waterways = mapConfig.mapStyle.getStyleLayerByName('waterway');
-waterways.river.material = new THREE.MeshBasicMaterial({ color: 0x4488cc, transparent: true, opacity: 0.8 });
+// Style buildings
+style.buildingLayer.buildingLayer.height = 1;
+style.buildingLayer.material = new THREE.MeshBasicMaterial({ color: 0x00000 });
+style.buildingLayer.buildingLayer.isVisible = true;
 ```
  
 Each layer exposes its types directly (e.g. `transport.primary`, `landuse.residential`) — set `material`, `outlineMaterial`, `isVisible`, `lineWidth`, and `YOrder` per type.
