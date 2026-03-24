@@ -60,24 +60,34 @@ animate();
 
 ---
 
+
 ## 🎨 Styling
-
-Style every layer and feature type individually:
-
+ 
+Access the style through `MapConfig` and modify materials directly on each layer type:
+ 
 ```js
 import * as THREE from 'three';
-
-const style = geo.getMapConfig().mapStyle;
-
-// Change road colors
-const transport = style.getStyleLayerByName('transportation');
+ 
+const mapConfig = geo.getMapConfig();
+ 
+// Style roads — get the layer, then set material on the type
+const transport = mapConfig.mapStyle.getStyleLayerByName('transportation');
 transport.primary.material = new THREE.MeshBasicMaterial({ color: 0xffffff });
-
-// Toggle land use visibility
-const landuse = style.getStyleLayerByName('landuse');
-landuse.park.isVisible = true;
+transport.primary.outlineMaterial = new THREE.MeshBasicMaterial({ color: 0xcccccc });
+transport.motorway.isVisible = true;
+transport.pedestrian.isVisible = false;
+ 
+// Style land use
+const landuse = mapConfig.mapStyle.getStyleLayerByName('landuse');
+landuse.residential.material = new THREE.MeshBasicMaterial({ color: 0xe8f4e8 });
 landuse.industrial.isVisible = false;
+ 
+// Style waterways
+const waterways = mapConfig.mapStyle.getStyleLayerByName('waterway');
+waterways.river.material = new THREE.MeshBasicMaterial({ color: 0x4488cc, transparent: true, opacity: 0.8 });
 ```
+ 
+Each layer exposes its types directly (e.g. `transport.primary`, `landuse.residential`) — set `material`, `outlineMaterial`, `isVisible`, `lineWidth`, and `YOrder` per type.
 
 ---
 
