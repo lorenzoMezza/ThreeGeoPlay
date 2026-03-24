@@ -2,7 +2,7 @@
 
 **Real-world map tiles rendered in 3D — powered by Three.js and OpenStreetMap vector data.**
 
-ThreeGeoPlay is a lightweight JavaScript library that fetches [Mapbox Vector Tiles (MVT/PBF)](https://docs.mapbox.com/vector-tiles/specification/) and renders them as 3D geometry directly into your Three.js scene. Roads, buildings, water, land use — all as real meshes you can walk through, fly over, or build games on top of.
+ThreeGeoPlay is a JavaScript library that fetches [Vector Tiles (MVT/PBF)](https://docs.mapbox.com/vector-tiles/specification/) and renders them as 3D geometry directly into your Three.js scene. Roads, buildings, water, land use — all as real meshes you can walk through, fly over, or build games on top of.
 
 ---
 
@@ -18,7 +18,7 @@ ThreeGeoPlay is a lightweight JavaScript library that fetches [Mapbox Vector Til
 
 ---
 
-## 📦 Installation
+## 📦 Installation (coming soon)
 
 ```bash
 npm install three-geo-play
@@ -44,9 +44,9 @@ const geo = new ThreeGeoPlay(scene, camera, renderer);
 const config = geo.getMapConfig();
 config.originLatLon       = { lat: 41.9028, lon: 12.4964 }; // Rome
 config.pbfTileProviderZXYurl = 'https://your-tile-server/{z}/{x}/{y}.pbf';
-config.zoomLevel          = 14;
-config.tileWorldSize      = 100;
-config.renderDistance     = 3;
+config.zoomLevel          = 16;
+config.tileWorldSize      = 50;
+config.renderDistance     = 6;
 
 geo.start();
 
