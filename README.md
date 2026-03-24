@@ -89,35 +89,6 @@ waterways.river.material = new THREE.MeshBasicMaterial({ color: 0x4488cc, transp
  
 Each layer exposes its types directly (e.g. `transport.primary`, `landuse.residential`) — set `material`, `outlineMaterial`, `isVisible`, `lineWidth`, and `YOrder` per type.
 
----
-
-## 🎮 Follow Mode
-
-Attach the map to any moving object — perfect for games:
-
-```js
-geo.setFollowTarget(myPlayerMesh); // automatically switches to FOLLOW_TARGET mode
-
-// Inside your animation loop:
-geo.onFrameUpdate(); // the map re-centers as the player moves
-```
-
----
-
-## ⚙️ MapConfig Options
-
-| Property | Description | Default |
-|---|---|---|
-| `originLatLon` | Starting `{ lat, lon }` | required |
-| `pbfTileProviderZXYurl` | Tile URL with `{z}`, `{x}`, `{y}` | required |
-| `zoomLevel` | OSM zoom level (12–16 recommended) | `14` |
-| `tileWorldSize` | World units per tile | `100` |
-| `renderDistance` | Tiles loaded around center | `3` |
-| `tileLayout` | `TileLayout.SQUARE` or `CIRCULAR` | `SQUARE` |
-| `showTileBorders` | Debug tile boundaries | `false` |
-
----
-
 ## 🗂️ Supported Layers
 
 | Layer | Types |
