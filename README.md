@@ -63,11 +63,12 @@ animate();
 
 ## 🎨 Styling
  
-Access the style through `MapConfig` and modify materials directly on each layer type:
+Access the style through ThreeGeoPlay `MapConfig` and modify materials directly on each layer type:
  
 ```js
 import * as THREE from 'three';
- 
+
+//geo is instance of  ThreeGeoPlay
 const mapConfig = geo.getMapConfig();
  
 // Style roads — get the layer, then set material on the type
