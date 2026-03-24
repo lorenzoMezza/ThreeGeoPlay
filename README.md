@@ -42,11 +42,11 @@ const geo = new ThreeGeoPlay(scene, camera, renderer);
 
 // Set your starting coordinates and tile source
 const config = geo.getMapConfig();
-config.originLatLon       = { lat: 41.9028, lon: 12.4964 }; // Rome
+config.originLatLon          = { lat: 41.9028, lon: 12.4964 }; // Rome
 config.pbfTileProviderZXYurl = 'https://your-tile-server/{z}/{x}/{y}.pbf';
-config.zoomLevel          = 16;
-config.tileWorldSize      = 50;
-config.renderDistance     = 6;
+config.zoomLevel             = 16;
+config.tileWorldSize         = 50;
+config.renderDistance        = 6;
 
 geo.start();
 
@@ -60,34 +60,62 @@ animate();
 
 ---
 
-
 ## 🎨 Styling
- 
+
 Access the style through ThreeGeoPlay `MapConfig` and modify materials directly on each layer type:
- 
+
 ```js
 import * as THREE from 'three';
 
-//geo is instance of  ThreeGeoPlay
+// geo is an instance of ThreeGeoPlay
 const style = geo.getMapConfig().mapStyle;
- 
-// Style roads 
-style.transportationLayer.primary.material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+
+// Style roads
+style.transportationLayer.primary.material        = new THREE.MeshBasicMaterial({ color: 0xffffff });
 style.transportationLayer.primary.outlineMaterial = new THREE.MeshBasicMaterial({ color: 0xcccccc });
-style.transportationLayer.motorway.isVisible = true;
-style.transportationLayer.pedestrian.isVisible = true;
- 
+style.transportationLayer.motorway.isVisible      = true;
+style.transportationLayer.pedestrian.isVisible    = true;
+
 // Style land use
 style.landUseLayer.residential.material = new THREE.MeshBasicMaterial({ color: 0xe8f4e8 });
-style.landUseLayer.industrial.isVisible = true;
- 
-// Style buildings
-style.buildingLayer.buildingLayer.height = 1;
-style.buildingLayer.material = new THREE.MeshBasicMaterial({ color: 0x00000 });
-style.buildingLayer.buildingLayer.isVisible = true;
+style.landUseLayer.industrial.isVisible = false;
+
+// Style buildings — material must be transparent to enable 3D extrusion
+style.buildingLayer.building.material  = new THREE.MeshBasicMaterial({ color: 0xaaaaaa, transparent: true, opacity: 0.9 });
+style.buildingLayer.building.isVisible = true;   // false to hide all buildings
+style.buildingLayer.building.height    = 1;      // extrusion scale factor
 ```
- 
-Each layer exposes its types directly (e.g. `transport.primary`, `landuse.residential`) — set `material`, `outlineMaterial`, `isVisible`, `lineWidth`, and `YOrder` per type.
+
+Each layer exposes its types directly — set `material`, `outlineMaterial`, `isVisible`, `lineWidth`, and `YOrder` per type.
+
+---
+
+## 🎮 Follow Mode
+
+Attach the map to any moving object — perfect for games:
+
+```js
+geo.setFollowTarget(myPlayerMesh); // automatically switches to FOLLOW_TARGET mode
+
+// Inside your animation loop:
+geo.onFrameUpdate(); // the map re-centers as the player moves
+```
+
+---
+
+## ⚙️ MapConfig Options
+
+| Property | Description | Default |
+|---|---|---|
+| `originLatLon` | Starting `{ lat, lon }` | required |
+| `pbfTileProviderZXYurl` | Tile URL with `{z}`, `{x}`, `{y}` | required |
+| `zoomLevel` | OSM zoom level (12–16 recommended) | `14` |
+| `tileWorldSize` | World units per tile | `100` |
+| `renderDistance` | Tiles loaded around center | `3` |
+| `tileLayout` | `TileLayout.SQUARE` or `CIRCULAR` | `SQUARE` |
+| `showTileBorders` | Debug tile boundaries | `false` |
+
+---
 
 ## 🗂️ Supported Layers
 
@@ -98,6 +126,14 @@ Each layer exposes its types directly (e.g. `transport.primary`, `landuse.reside
 | `waterway` | river, stream, canal, ditch… |
 | `landuse` | residential, park, industrial, school, hospital… |
 | `background` | ground plane |
+
+---
+
+## 🛰️ Tile Providers
+
+Currently tested and supported with **[OpenMapTiles](https://openmaptiles.org/)** compatible endpoints.
+
+> **Coming soon:** Mapbox Vector Tiles support.
 
 ---
 
