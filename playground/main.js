@@ -8,7 +8,8 @@ import {
   TileLayout, 
   ViewMode, 
   MapConfig 
-} from '../src/index.js';  // <-- punta all'index.js della libreria
+} from '../src/index.js';
+
 // ─── Scene ─────────────────────────────────────────────────
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x1a1a2e)
