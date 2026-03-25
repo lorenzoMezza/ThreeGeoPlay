@@ -24,7 +24,7 @@ ThreeGeoPlay is a JavaScript library that fetches [Vector Tiles (MVT/PBF)](https
 
 ---
 
-## 📦 Installation (coming soon)
+## 📦 Installation
 
 ```bash
 npm install three-geo-play
