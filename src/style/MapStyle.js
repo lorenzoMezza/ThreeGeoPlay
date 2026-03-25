@@ -6,14 +6,39 @@ import { TransportationLayer } from './TransportationLayer.js';
 import { WaterwayLayer }       from './WaterWayLayer.js';
 import { BackgroundLayer }     from './BackgroundLayer.js';
 
+/**
+ * Top-level style container for a ThreeGeoPlay map.
+ * Holds one instance of each renderable layer and exposes them as properties.
+ * Pass a `MapStyle` instance to {@link MapConfig#mapStyle} to apply it.
+ *
+ * @example
+ * const style = geoPlay.getMapConfig().mapStyle;
+ * style.buildingLayer.isVisible = true;
+ * style.transportationLayer.motorway.material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+ *
+ * @class
+ */
 export class MapStyle {
 
+    /** @type {BuildingLayer} */
     #buildingLayer;
+
+    /** @type {WaterLayer} */
     #waterLayer;
+
+    /** @type {WaterwayLayer} */
     #waterwayLayer;
+
+    /** @type {LandUseLayer} */
     #landUseLayer;
+
+    /** @type {LandCoverLayer} */
     #landCoverLayer;
+
+    /** @type {TransportationLayer} */
     #transportationLayer;
+
+    /** @type {BackgroundLayer} */
     #backgroundLayer;
 
     constructor() {
@@ -26,6 +51,11 @@ export class MapStyle {
         this.#backgroundLayer     = new BackgroundLayer();
     }
 
+    /**
+     * Retrieves a style layer by its internal name.
+     * @param {'background'|'waterway'|'water'|'landcover'|'landuse'|'building'|'transportation'} layerName
+     * @returns {BackgroundLayer|WaterwayLayer|WaterLayer|LandCoverLayer|LandUseLayer|BuildingLayer|TransportationLayer|null}
+     */
     getStyleLayerByName(layerName) {
         switch (layerName) {
             case 'background':     return this.#backgroundLayer;
@@ -39,24 +69,52 @@ export class MapStyle {
         }
     }
 
+    /**
+     * The building extrusion layer.
+     * @type {BuildingLayer}
+     */
     get buildingLayer() { return this.#buildingLayer; }
     set buildingLayer(layer) { this.#buildingLayer = layer; }
 
+    /**
+     * The water body layer (lakes, oceans, rivers as polygons).
+     * @type {WaterLayer}
+     */
     get waterLayer() { return this.#waterLayer; }
     set waterLayer(layer) { this.#waterLayer = layer; }
 
+    /**
+     * The waterway layer (rivers, canals, ditches as lines).
+     * @type {WaterwayLayer}
+     */
     get waterwayLayer() { return this.#waterwayLayer; }
     set waterwayLayer(layer) { this.#waterwayLayer = layer; }
 
+    /**
+     * The land use layer (residential, industrial, parks, etc.).
+     * @type {LandUseLayer}
+     */
     get landUseLayer() { return this.#landUseLayer; }
     set landUseLayer(layer) { this.#landUseLayer = layer; }
 
+    /**
+     * The land cover layer (grass, wood, sand, etc.).
+     * @type {LandCoverLayer}
+     */
     get landCoverLayer() { return this.#landCoverLayer; }
     set landCoverLayer(layer) { this.#landCoverLayer = layer; }
 
+    /**
+     * The transportation layer (roads, rails, paths, etc.).
+     * @type {TransportationLayer}
+     */
     get transportationLayer() { return this.#transportationLayer; }
     set transportationLayer(layer) { this.#transportationLayer = layer; }
 
+    /**
+     * The background (base fill) layer rendered beneath all other layers.
+     * @type {BackgroundLayer}
+     */
     get backgroundLayer() { return this.#backgroundLayer; }
     set backgroundLayer(layer) { this.#backgroundLayer = layer; }
 }
