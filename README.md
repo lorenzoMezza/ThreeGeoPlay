@@ -1,3 +1,9 @@
+
+<img width="504" height="392" alt="491275803-585ea8ae-239b-43db-aa20-e2b5ca5a784d (1)" src="https://github.com/user-attachments/assets/2382f57e-71be-405b-97f7-574345885323" />
+
+
+
+
 # 🌍 ThreeGeoPlay
 
 **Real-world map tiles rendered in 3D — powered by Three.js and OpenStreetMap vector data.**
