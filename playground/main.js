@@ -54,8 +54,8 @@ cfg.viewMode = ViewMode.FOLLOW_TARGET
 cfg.originLatLon = { lat: 41.899689, lon: 12.437790 }
 cfg.showTileBorders = false
 cfg.pbfTileProviderZXYurl = `http://localhost:8090/tiles/{z}/{x}/{y}.pbf`
-//cfg.mapStyle.transportationLayer.primary.isVisible
-//cfg.mapStyle.buildingLayer.material = new three material
+
+
 
 //gp.setFollowTarget()
 
